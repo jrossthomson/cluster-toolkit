@@ -39,46 +39,57 @@ via a [PubSub BigQuery subscription](https://cloud.google.com/pubsub/docs/bigque
   [Vertex AI Workbench](https://cloud.google.com/vertex-ai-workbench)
   [Jupyter Notebook](https://jupyter.org/)
 
-<img src="https://services.google.com/fh/files/blogs/fsi_architecture.png" width="800" />
 
 ## Basic getting started
 
-1. Get the Cluster Toolkit configured.
+1. Enable some APIs required:
 
-Build the `gcluster` binary:
+  ```
+  gcloud services enable \
+      pubsub.googleapis.com \
+      bigquery.googleapis.com \
+      compute.googleapis.com
+  ```
+  ```
+  gcloud beta services identity create --service=pubsub.googleapis.com --project=qwiklabs-asl-02-b4d190658978
+  ```
 
-```shell
-git clone https://github.com/GoogleCloudPlatform/cluster-toolkit
-cd cluster-toolkit
-make
-./gcluster --version
-./gcluster --help
-```
+2. Get the Cluster Toolkit configured.
 
-2\. Run `gcluster` on the blueprint `fsi-montecarlo-on-batch.yaml`
+  Build the `gcluster` binary:
 
-```bash
-./gcluster create community/examples/fsi-montecarlo-on-batch.yaml \
-   --vars "project_id=${GOOGLE_CLOUD_PROJECT}"
-```
+  ```shell
+  git clone https://github.com/GoogleCloudPlatform/cluster-toolkit
+  cd cluster-toolkit
+  make
+  ./gcluster --version
+  ./gcluster --help
+  ```
 
-Where `GOOGLE_CLOUD_PROJECT` has been set via an export command
+3. Run `gcluster` on the blueprint `fsi-montecarlo-on-batch.yaml`
 
-```shell
-export GOOGLE_CLOUD_PROJECT=my_project_id
-```
+  ```bash
+  ./gcluster create community/examples/fsi-montecarlo-on-batch.yaml \
+    --vars "project_id=${GOOGLE_CLOUD_PROJECT}"
+  ```
 
-If successful, you will see output similar to:
+  Where `GOOGLE_CLOUD_PROJECT` has been set via an export command
 
-<blockquote>
-<p>
-To deploy your infrastructure please run:
+  ```shell
+  export GOOGLE_CLOUD_PROJECT=my_project_id
+  ```
 
-./gcluster deploy fsimontecarlo
-</p>
+  If successful, you will see output similar to:
+
+  <blockquote>
+  <p>
+  To deploy your infrastructure please run:
+
+  ./gcluster deploy fsimontecarlo
+  </p>
 </blockquote>
 
-3\. Deploy the blueprint as instructed:
+4. Deploy the blueprint as instructed:
 
 ```bash
 ./gcluster deploy fsimontecarlo
