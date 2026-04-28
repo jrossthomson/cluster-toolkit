@@ -15,7 +15,7 @@ project_id: "${project_id}"
 region: "${region}"
 
 job_prefix: 'fsi-'
-machine_type: "n2-standard-2"
+machine_type: "n2-highmem-16"
 volumes:
 - {bucket_name: "${bucket_name}", gcs_path: "/mnt/disks/fsi"}
 
@@ -28,7 +28,7 @@ task_count: 8 #optional
 parallelism: 4 #optional
 task_count_per_node: 2 #optional
 cpu_milli: 1000 #optional
-memory_mib: 102400 #optional
+memory_mib: 10240 #optional
 
 
 labels:
