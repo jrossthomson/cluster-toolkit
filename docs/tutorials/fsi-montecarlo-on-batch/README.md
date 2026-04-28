@@ -48,7 +48,7 @@ via a [PubSub BigQuery subscription](https://cloud.google.com/pubsub/docs/bigque
 Build the `gcluster` binary:
 
 ```shell
-git clone https://github.com/GoogleCloudPlatform/cluster-toolkit
+git clone https://github.com/jrossthomson/cluster-toolkit.git
 cd cluster-toolkit
 make
 ./gcluster --version
@@ -58,44 +58,18 @@ make
 2\. Run `gcluster` on the blueprint `fsi-montecarlo-on-batch.yaml`
 
 ```bash
-./gcluster create community/examples/fsi-montecarlo-on-batch.yaml \
-   --vars "project_id=${GOOGLE_CLOUD_PROJECT}"
+./gcluster  deploy community/examples/fsi-montecarlo-on-batch.yaml \
+   --vars "project_id=${GOOGLE_CLOUD_PROJECT}" --auto-approve 
 ```
-
 Where `GOOGLE_CLOUD_PROJECT` has been set via an export command
-
 ```shell
 export GOOGLE_CLOUD_PROJECT=my_project_id
 ```
 
-If successful, you will see output similar to:
+> **NOTE -- Running on Cloud Shell:** 
 
-<blockquote>
-<p>
-To deploy your infrastructure please run:
+> If you run out of disk storage, you can add `-o /tmp` to the command to make use of the storage under `/tmp`. Note that this storage is ephemeral.
 
-./gcluster deploy fsimontecarlo
-</p>
-</blockquote>
-
-3\. Deploy the blueprint as instructed:
-
-```bash
-./gcluster deploy fsimontecarlo
-```
-
-If successful, this will prompt you:
-
-```bash
-Summary of proposed changes: Plan: 22 to add, 0 to change, 0 to destroy.
-(D)isplay full proposed changes,
-(A)pply proposed changes,
-(S)top and exit,
-(C)ontinue without applying
-Please select an option [d,a,s,c]:
-```
-
-Respond with `apply`, "a". You may be asked to respond twice.
 
 When the job is complete it will indicate `Succeeded`. You can then proceed to
 the next section.
